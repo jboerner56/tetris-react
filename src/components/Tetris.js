@@ -1,4 +1,5 @@
 import React from 'react';
+import { createStage } from '../createStage'
 import StartButton from './StartButton';
 import Stage from './Stage';
 import Display from './Display';
@@ -7,7 +8,7 @@ class Tetris extends React.Component {
     render() {
         return (
             <div>
-                <Stage />
+                <Stage stage={createStage()} />
                 <aside>
                     <div>
                         <Display text="Score" />
