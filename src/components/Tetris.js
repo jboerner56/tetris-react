@@ -3,25 +3,28 @@ import { createStage } from '../createStage'
 import StartButton from './StartButton';
 import Stage from './Stage';
 import Display from './Display';
+import { StyledTetris, StyledTetrisWrapper } from '../Styles/StyledTetris';
 
-class Tetris extends React.Component {
-    render() {
+const Tetris = () => {
         return (
             <div>
-                <Stage stage={createStage()} />
-                <aside>
-                    <div>
-                        <Display text="Score" />
-                        <Display text="Rows" />
-                        <Display text="Level" />
-                    </div>
-                    <div>
-                        <StartButton />
-                    </div>
+            <StyledTetrisWrapper>
+                <StyledTetris>
+                    <Stage stage={createStage()} />
+                    <aside>
+                        <div>
+                            <Display text="Score" />
+                            <Display text="Rows" />
+                            <Display text="Level" />
+                        </div>
+                        <div>
+                            <StartButton />
+                        </div>
                 </aside>
+                </StyledTetris>
+            </StyledTetrisWrapper>
             </div>
         );
-    }
 }
 
 export default Tetris;
