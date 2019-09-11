@@ -5,7 +5,7 @@ import { Blocks } from '../Blocks';
 const Cell = ({type}) => (
     // will grab color our of the blocks array
     // using L (one of the block names) to hold the place for the gameplay functions later
-    <StyledCell type={'L'} color={Blocks['L'].color}>cell</StyledCell>
+    <StyledCell type={'L'} color={Blocks['L'].color} />
 )
 
 export default Cell;
