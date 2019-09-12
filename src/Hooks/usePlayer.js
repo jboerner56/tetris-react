@@ -11,6 +11,7 @@ const usePlayer = () => {
         block: randomBlock().shape,
         collided: false,
     });
+    // function returns the player array
     return [player];
     // short for
     // first sets/ creates state by setting playerState equal to useState();
