@@ -17,9 +17,14 @@ const useStage = (player, resetPlayer) => {
             );
             // after checking if the cell is occupied or not. we will draw the tetris block in the cells
             // get block from the usePlayer hook, gets sent in through the useStage hook above, so we have access to the player methods here
+            // only need to loop through each cell without returning anything bc this is only to check if the cell is clear or occupied
+            // have to again loop though the array twice for both x and y axis'
             player.block.forEach((row, y) => {
                 row.forEach((value, x) => {
+                    // value is the block that we are looping through, from Blocks.js array
+                    // if value is not zero, that means there is something that is supposed to be in that cell for the block
                     if(value !== 0) {
+
                         newStage[y + player.pos.y][x + player.pos.x] = [
                             value, 
                             `${player.collided ? 'merged' : 'clear'}`,

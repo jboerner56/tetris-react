@@ -64,8 +64,8 @@ export const Blocks = {
 }
 
 export const randomBlock = () => {
-    const blockss = 'IJLOSTZ';
+    const blocks = 'IJLOSTZ';
     const randBlock =
-        blockss[Math.floor(Math.random() * blockss.length)];
+        blocks[Math.floor(Math.random() * blocks.length)];
     return Blocks[randBlock];
 }
