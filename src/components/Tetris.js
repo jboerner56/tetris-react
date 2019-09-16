@@ -9,7 +9,7 @@ import useStage from '../Hooks/useStage';
 const Tetris = () => {
     const [dropTime, setDropTime] = useState(null);
     const [gameOver, setGameOver] = useState(false);
-
+// hooks taken from own files for readibility and easier debugging
     const[player, updatePosition, resetPlayer] = usePlayer();
     const [stage, setStage] = useStage(player);
 
