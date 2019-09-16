@@ -10,17 +10,30 @@ const Tetris = () => {
     const [dropTime, setDropTime] = useState(null);
     const [gameOver, setGameOver] = useState(false);
 
-    const[player] = usePlayer();
+    const[player, updatePosition, resetPlayer] = usePlayer();
     const [stage, setStage] = useStage(player);
 
 
     console.log('rerender');
 
     const movePlayer = dir => {
-
+        // move position based on keyboard arrow press for x axis.
+        updatePosition({ x: dir, y: 0 })
     }
 
+    const startGame = () => {
+        // reset game
+        setStage(createStage());
+        resetPlayer();
+    }
+    const drop = () => {
+        // when called will move the block by 1 on the y-axis (drop down one row on grid)
+        // when block hits another it will change collided to true and not allow block to drop any further down
+        updatePosition({ x: 0, y: 1, collided: false })
+
+    }
     const dropPlayer = () => {
+        drop();
 
     }
     const move = ({ key }) => {
@@ -59,7 +72,7 @@ const Tetris = () => {
                         )}
 
                         <div>
-                            <StartButton />
+                            <StartButton onClick={startGame}/>
                         </div>
                 </aside>
                 </StyledTetris>
