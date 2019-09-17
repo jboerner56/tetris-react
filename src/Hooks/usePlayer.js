@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { randomBlock, Blocks} from '../Blocks';
-import { STAGE_WIDTH, STAGE_HEIGHT } from '../createStage';
+import { STAGE_WIDTH } from '../createStage';
 
 const usePlayer = () => {
     // creates state for the player

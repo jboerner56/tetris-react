@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createStage } from '../createStage';
+import { createStage, checkCollision } from '../createStage';
 import StartButton from './StartButton';
 import Stage from './Stage';
 import Display from './Display';
@@ -17,8 +17,10 @@ const Tetris = () => {
     console.log('rerender');
 
     const movePlayer = dir => {
-        // move position based on keyboard arrow press for x axis.
-        updatePosition({ x: dir, y: 0 })
+        if(!checkCollision(player, stage, { x: dir, y: 0})) {
+            // move position based on keyboard arrow press for x axis.
+            updatePosition({ x: dir, y: 0 })
+        }
     }
 
     const startGame = () => {
