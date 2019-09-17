@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { randomBlock} from '../Blocks';
+import { randomBlock, Blocks} from '../Blocks';
 import { STAGE_WIDTH, STAGE_HEIGHT } from '../createStage';
 
 const usePlayer = () => {
@@ -9,7 +9,8 @@ const usePlayer = () => {
         // setting initial state for the player
         // initial (x,y)position/ coord.
         pos: { x: 0, y: 0 },
-        block: randomBlock().shape,
+        // use the first item in the blocks array so nothing shows up on the first render
+        block: Blocks[0].shape,
         collided: false,
     });
 // setting state either initially or with the updated position on rerendering
@@ -29,7 +30,7 @@ const usePlayer = () => {
                 // do not need to use state since it is resetting everything/ new game
                 // set x-axis to half the array width to get it kind of in the middle
                 // y-axis is set to zero so it will always start at the top
-                pos: {x: STAGE_WIDTH/2, y: 0},
+                pos: {x: STAGE_WIDTH/2 - 1, y: 0},
                 block: randomBlock().shape,
                 collided: false
             })

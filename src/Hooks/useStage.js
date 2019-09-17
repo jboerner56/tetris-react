@@ -35,7 +35,7 @@ const useStage = (player, resetPlayer) => {
             return newStage
         };
         setStage(prev => updateStage(prev))
-    }, [player.block, player.collided, player.pos.x, player.pos.y]);
+    }, [player]);
     return [stage, setStage];
 }
 
