@@ -27,29 +27,46 @@ const Tetris = () => {
         // reset game
         setStage(createStage());
         resetPlayer();
+        setGameOver(false);
     }
     const drop = () => {
-        // when called will move the block by 1 on the y-axis (drop down one row on grid)
-        // when block hits another it will change collided to true and not allow block to drop any further down
-        updatePosition({ x: 0, y: 1, collided: false })
+        // allow move to happen as long as checkCollision is false
+        if(!checkCollision(player, stage, { x: 0, y: 1 })){
+            // when called will move the block by 1 on the y-axis (drop down one row on grid)
+            // when block hits another it will change collided to true and not allow block to drop any further down
+            updatePosition({ x: 0, y: 1, collided: false })
+            // if it is true then set that block in place
+        } 
+        else {
+            // if the player position is less than 1 and it collided with a block that means the game is over
+            if(player.pos.y < 1){
+                console.log("game over", player.pos);
+                setDropTime(null);
+                setGameOver(true);
+            }
+            updatePosition({ x: 0, y: 0, collided: true});
+        }
 
     }
     const dropPlayer = () => {
         drop();
 
     }
-    const move = ({ key }) => {
+    const move = ({ keyCode }) => {
         if(!gameOver) {
             // 37 is the keycode for the left arrow key
-            if(key === 37){
+            if(keyCode === 37){
                 // use movePlayer function and subtract one to move the block one to the left
+                console.log("left arrow");
+                
                 movePlayer(-1)
                 // 39 is keycode for right arrow
-            } else if(key === 39){
+            } else if(keyCode === 39){
                 // add one to move one block to the right
+                console.log("right arrow", player.pos);
                 movePlayer(1)
                 // 40 is down arrow keycode
-            } else if(key === 40)
+            } else if(keyCode === 40)
             // 
             dropPlayer();
         }
