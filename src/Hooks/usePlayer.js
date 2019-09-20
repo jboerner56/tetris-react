@@ -38,7 +38,12 @@ const usePlayer = () => {
 
     }
     const playerRotateBlock = (stage, dir) => {
-
+        // need to make a full copy of the player state
+        const copiedPlayer = JSON.parse(JSON.stringify(player));
+        // use rotate function to get the rotated block
+        copiedPlayer.block = rotateBlock(copiedPlayer.block, dir);
+        // set player to the new state (copiedPlayer)
+        setPlayer(copiedPlayer);
     }
     // need to use the useCallback builtin function to stop the game from going into a infinite loop
     const resetPlayer = useCallback(() => {
@@ -53,7 +58,7 @@ const usePlayer = () => {
         }, [])
 
     // function returns the player array
-    return [player, updatePosition, resetPlayer];
+    return [player, updatePosition, resetPlayer, playerRotateBlock];
     // short for
     // first sets/ creates state by setting playerState equal to useState();
     // const playerState = useState();

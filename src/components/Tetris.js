@@ -10,7 +10,7 @@ const Tetris = () => {
     const [dropTime, setDropTime] = useState(null);
     const [gameOver, setGameOver] = useState(false);
 // hooks taken from own files for readibility and easier debugging
-    const[player, updatePosition, resetPlayer] = usePlayer();
+    const[player, updatePosition, resetPlayer, playerRotateBlock] = usePlayer();
     const [stage, setStage] = useStage(player, resetPlayer);
 
 
@@ -67,9 +67,14 @@ const Tetris = () => {
                 console.log("right arrow", player.pos);
                 movePlayer(1)
                 // 40 is down arrow keycode
-            } else if(keyCode === 40)
-            // 
-            dropPlayer();
+            } else if(keyCode === 40) {
+                dropPlayer();
+            } else if (keyCode === 38) {
+                // up arrow will call the rotate function to rotate the block
+                // can add another else if block for rotation counterclockwise if wanted
+                // need to give it the stage for collision detection, the 1 is the rotation direction
+                playerRotateBlock(stage, 1)
+            }
         }
     }
         return (
