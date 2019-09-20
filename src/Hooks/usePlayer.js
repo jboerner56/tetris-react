@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { randomBlock, Blocks} from '../Blocks';
-import { STAGE_WIDTH } from '../createStage';
+import { STAGE_WIDTH, checkCollision } from '../createStage';
 
 const usePlayer = () => {
     // creates state for the player
@@ -27,7 +27,7 @@ const usePlayer = () => {
     const rotateBlock = (block, dir) => {
         // convert rows to columns
         // map through the block twice to convert the rows to columns
-        const rotatedBlock = block.map((_, index) => block.map(column => column[index]));
+        const rotateBlock = block.map((_, index) => block.map(column => column[index]));
         // reverse each row to get a rotated block
         // clockwise is positive direction, negative is for counterclockwise rotation
         if (dir > 0){
@@ -42,6 +42,19 @@ const usePlayer = () => {
         const copiedPlayer = JSON.parse(JSON.stringify(player));
         // use rotate function to get the rotated block
         copiedPlayer.block = rotateBlock(copiedPlayer.block, dir);
+        // first want to copy/save the players position
+        const pos = copiedPlayer.pos.x
+        let offset = 1;
+        while(checkCollision(copiedPlayer, stage, { x: 0, y:0 })) {
+            copiedPlayer.pos.x += offset;
+            offset = -(offset + (offset > 0 ? 1 : -1));
+            if (offset > copiedPlayer.tetromino[0].length) {
+            rotateBlock(copiedPlayer.tetromino, -dir);
+            copiedPlayer.pos.x = pos;
+            return;
+            }
+        }
+
         // set player to the new state (copiedPlayer)
         setPlayer(copiedPlayer);
     }
