@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { createStage } from '../createStage';
 
-const useStage = (player, resetPlayer) => {
+export const useStage = (player, resetPlayer) => {
     // set up same way as usePlayer for creating the stage
     const [stage, setStage] = useState(createStage());
     useEffect(() => {
@@ -31,11 +31,10 @@ const useStage = (player, resetPlayer) => {
                         ];
                     }
                 });
+                if (player.collided) {
+                    resetPlayer();
+                }
             });
-            // check if collided
-            if(player.collided){
-                resetPlayer();
-            }
             return newStage
         };
         setStage(prev => updateStage(prev))
@@ -43,4 +42,3 @@ const useStage = (player, resetPlayer) => {
     return [stage, setStage];
 }
 
-export default useStage;

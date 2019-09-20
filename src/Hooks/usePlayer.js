@@ -24,6 +24,22 @@ const usePlayer = () => {
             collided,
         }))
     }
+    const rotateBlock = (block, dir) => {
+        // convert rows to columns
+        // map through the block twice to convert the rows to columns
+        const rotatedBlock = block.map((_, index) => block.map(column => column[index]));
+        // reverse each row to get a rotated block
+        // clockwise is positive direction, negative is for counterclockwise rotation
+        if (dir > 0){
+            return rotateBlock.map(row => row.reverse());
+        } else {
+            return rotateBlock.reverse();
+        }
+
+    }
+    const playerRotateBlock = (stage, dir) => {
+
+    }
     // need to use the useCallback builtin function to stop the game from going into a infinite loop
     const resetPlayer = useCallback(() => {
             setPlayer({

@@ -5,13 +5,13 @@ import Stage from './Stage';
 import Display from './Display';
 import { StyledTetris, StyledTetrisWrapper } from '../Styles/StyledTetris';
 import usePlayer from '../Hooks/usePlayer';
-import useStage from '../Hooks/useStage';
+import { useStage } from '../Hooks/useStage';
 const Tetris = () => {
     const [dropTime, setDropTime] = useState(null);
     const [gameOver, setGameOver] = useState(false);
 // hooks taken from own files for readibility and easier debugging
     const[player, updatePosition, resetPlayer] = usePlayer();
-    const [stage, setStage] = useStage(player);
+    const [stage, setStage] = useStage(player, resetPlayer);
 
 
     console.log('rerender');
@@ -20,6 +20,7 @@ const Tetris = () => {
         if(!checkCollision(player, stage, { x: dir, y: 0})) {
             // move position based on keyboard arrow press for x axis.
             updatePosition({ x: dir, y: 0 })
+            console.log("moved", player.pos)
         }
     }
 
